@@ -5,6 +5,6 @@ namespace FilmSpinAPI.Interfaces;
 public interface ITmdbService
 {
     Task<Film> GetRandomFilmAsync(FilmRequest filmRequest, int page);
-    Task<int> GetPagesAsync(FilmRequest filmRequest);
+    Task<int> GetRandomPageAsync(FilmRequest filmRequest);
     Task<List<Genre>> GetGenresAsync();
 }
