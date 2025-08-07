@@ -9,10 +9,10 @@ namespace FilmSpinAPI.Services;
 public class TmdbService : ITmdbService
 {
     private readonly HttpClient _client;
-    public string Url { get; set; } = Configuration.Url;
-    public string GenreUrl { get; set; } = Configuration.GenreUrl;
-    public string TmdbToken { get; set; } = Configuration.TmdbToken;
-    public Random Random { get; set; } = new();
+    public string Url { get; init; } = Configuration.Url;
+    public string GenreUrl { get; init; } = Configuration.GenreUrl;
+    public string TmdbToken { get; init; } = Configuration.TmdbToken;
+    public Random Random { get; private set; } = new();
 
     public TmdbService(HttpClient client)
     {
@@ -20,7 +20,7 @@ public class TmdbService : ITmdbService
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TmdbToken);
     }
 
-    public string BuildUrl(FilmRequest filmRequest)
+    private string BuildUrl(FilmRequest filmRequest)
     {
         if (string.IsNullOrEmpty(filmRequest.Decade))
             return $"{Url}?language=pt-BR&vote_average.gte={filmRequest.Rating}&with_genres={filmRequest.Genre}&vote_count.gte=250";
@@ -28,8 +28,20 @@ public class TmdbService : ITmdbService
         return $"{Url}?language=pt-BR&primary_release_date.gte={int.Parse(filmRequest.Decade)}-01-01&primary_release_date.lte={int.Parse(filmRequest.Decade) + 9}-12-31&vote_average.gte={filmRequest.Rating}&with_genres={filmRequest.Genre}&vote_count.gte=250";
     }
 
-    public async Task<Film?> GetRandomFilmAsync(FilmRequest filmRequest, int page)
+    private async Task<int> GetRandomPageAsync(FilmRequest filmRequest)
     {
+        var response = await _client.GetAsync(BuildUrl(filmRequest));
+        var data = await response.Content.ReadFromJsonAsync<FilmResponse>();
+
+        if (data == null)
+            throw new ApiResponseException();
+
+        return Random.Next(1, Math.Min(data.TotalPages, 500) + 1);
+    }
+
+    public async Task<Film?> GetRandomFilmAsync(FilmRequest filmRequest)
+    {
+        var page = await GetRandomPageAsync(filmRequest);
         var response = await _client.GetAsync($"{BuildUrl(filmRequest)}&page={page}");
         var data = await response.Content.ReadFromJsonAsync<FilmResponse>();
 
@@ -46,17 +58,6 @@ public class TmdbService : ITmdbService
             film.Genres = allGenres.Where(x => film.GenreIds.Contains(x.Id)).ToList();
 
         return film;
-    }
-
-    public async Task<int> GetRandomPageAsync(FilmRequest filmRequest)
-    {
-        var response = await _client.GetAsync(BuildUrl(filmRequest));
-        var data = await response.Content.ReadFromJsonAsync<FilmResponse>();
-
-        if (data == null)
-            throw new ApiResponseException();
-
-        return Random.Next(1, Math.Min(data.TotalPages, 500) + 1);
     }
 
     public async Task<List<Genre>?> GetGenresAsync()

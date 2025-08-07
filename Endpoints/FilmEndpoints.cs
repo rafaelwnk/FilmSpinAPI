@@ -17,8 +17,7 @@ public static class FilmEndpoints
                 if (filmRequest.IsValid() is (false, var message))
                     return filmRequest.ToBadRequestResult(message!);
 
-                var page = await tmdbService.GetRandomPageAsync(filmRequest);
-                var film = await tmdbService.GetRandomFilmAsync(filmRequest, page);
+                var film = await tmdbService.GetRandomFilmAsync(filmRequest);
                 return film.ToOkOrNotFoundResult("Nenhum filme encontrado");
             }
             catch (ApiResponseException e)
