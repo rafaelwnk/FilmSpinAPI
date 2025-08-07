@@ -7,8 +7,8 @@ namespace FilmSpinAPI.Services;
 public class TmdbService : ITmdbService
 {
     private readonly HttpClient _client;
-    public string Url { get; set; } = "https://api.themoviedb.org/3/discover/movie";
-    public string GenreUrl { get; set; } = "https://api.themoviedb.org/3/genre/movie/list?language=pt-BR";
+    public string Url { get; set; } = Configuration.Url;
+    public string GenreUrl { get; set; } = Configuration.GenreUrl;
     public string TmdbToken { get; set; } = Configuration.TmdbToken;
     public Random Random { get; set; } = new();
 
