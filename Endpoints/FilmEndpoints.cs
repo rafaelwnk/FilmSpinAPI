@@ -1,6 +1,6 @@
+using FilmSpinAPI.DTOs;
 using FilmSpinAPI.Exceptions;
 using FilmSpinAPI.Interfaces;
-using FilmSpinAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilmSpinAPI.Endpoints;

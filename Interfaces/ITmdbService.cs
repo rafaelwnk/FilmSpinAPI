@@ -1,3 +1,4 @@
+using FilmSpinAPI.DTOs;
 using FilmSpinAPI.Models;
 
 namespace FilmSpinAPI.Interfaces;

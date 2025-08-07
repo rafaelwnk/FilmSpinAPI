@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using FilmSpinAPI.DTOs;
 using FilmSpinAPI.Exceptions;
 using FilmSpinAPI.Interfaces;
 using FilmSpinAPI.Models;
