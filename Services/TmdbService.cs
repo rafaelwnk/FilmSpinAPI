@@ -1,9 +1,10 @@
 using System.Net.Http.Headers;
+using FilmSpinAPI.Interfaces;
 using FilmSpinAPI.Models;
 
 namespace FilmSpinAPI.Services;
 
-public class TmdbService
+public class TmdbService : ITmdbService
 {
     private readonly HttpClient _client;
     public string Url { get; set; } = "https://api.themoviedb.org/3/discover/movie";
