@@ -1,5 +1,6 @@
 using FilmSpinAPI.DTOs;
 using FilmSpinAPI.Exceptions;
+using FilmSpinAPI.Extensions;
 using FilmSpinAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,29 +10,20 @@ public static class FilmEndpoints
 {
     public static void MapFilmEndpoints(this WebApplication app)
     {
-        app.MapGet("/v1/films", async ([FromBody] FilmRequest filmRequest, ITmdbService tmdbService) =>
+        app.MapPost("/v1/films", async ([FromBody] FilmRequest filmRequest, ITmdbService tmdbService) =>
         {
             try
             {
+                if (filmRequest.IsValid() is (false, var message))
+                    return filmRequest.ToBadRequestResult(message!);
+
                 var page = await tmdbService.GetRandomPageAsync(filmRequest);
                 var film = await tmdbService.GetRandomFilmAsync(filmRequest, page);
-                return Results.Ok(film);
-            }
-            catch (FilmNotFoundException e)
-            {
-                return Results.NotFound(new { message = e.Message });
-            }
-            catch (ArgumentException e)
-            {
-                return Results.BadRequest(new { message = e.Message });
+                return film.ToOkOrNotFoundResult("Nenhum filme encontrado");
             }
             catch (ApiResponseException e)
             {
-                return Results.Problem(
-                    title: "Bad Gateway",
-                    detail: e.Message,
-                    statusCode: StatusCodes.Status502BadGateway
-                );
+                return e.ToFallbackResponse(e.Message);
             }
         });
 
@@ -40,19 +32,11 @@ public static class FilmEndpoints
             try
             {
                 var genres = await tmdbService.GetGenresAsync();
-                return Results.Ok(genres);
-            }
-            catch (GenresNotFoundException e)
-            {
-                return Results.NotFound(new { message = e.Message });
+                return genres.ToOkOrNotFoundResult("Nenhum gênero encontrado");
             }
             catch (ApiResponseException e)
             {
-                return Results.Problem(
-                    title: "Bad Gateway",
-                    detail: e.Message,
-                    statusCode: StatusCodes.Status502BadGateway
-                );
+                return e.ToFallbackResponse(e.Message);
             }
         });
     }
