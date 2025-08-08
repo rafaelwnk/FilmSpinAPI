@@ -7,5 +7,6 @@ builder.AddServices();
 
 var app = builder.Build();
 app.MapFilmEndpoints();
+app.MapHealthChecks("/health");
 
 app.Run();

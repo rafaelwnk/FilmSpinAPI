@@ -16,5 +16,6 @@ public static class BuilderExtensions
     {
         builder.Services.AddHttpClient();
         builder.Services.AddScoped<ITmdbService, TmdbService>();
+        builder.Services.AddHealthChecks();
     }
 }
