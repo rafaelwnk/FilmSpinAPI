@@ -9,6 +9,7 @@ public static class BuilderExtensions
     {
         Configuration.Url = builder.Configuration.GetValue<string>("Url")!;
         Configuration.GenreUrl = builder.Configuration.GetValue<string>("GenreUrl")!;
+        Configuration.PosterUrl = builder.Configuration.GetValue<string>("PosterUrl")!;
         Configuration.TmdbToken = builder.Configuration.GetValue<string>("TmdbToken")!;
     }
 

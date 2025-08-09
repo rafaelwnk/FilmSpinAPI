@@ -24,5 +24,5 @@ public class Film
     public string ReleaseDate { get; set; } = string.Empty;
 
     [JsonPropertyName("vote_average")]
-    public float VoteAverage { get; set; }
+    public double VoteAverage { get; set; }
 }

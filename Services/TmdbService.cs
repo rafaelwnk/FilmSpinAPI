@@ -11,6 +11,7 @@ public class TmdbService : ITmdbService
     private readonly HttpClient _client;
     public string Url { get; init; } = Configuration.Url;
     public string GenreUrl { get; init; } = Configuration.GenreUrl;
+    public string PosterUrl { get; init; } = Configuration.PosterUrl;
     public string TmdbToken { get; init; } = Configuration.TmdbToken;
     public Random Random { get; private set; } = new();
 
@@ -56,6 +57,10 @@ public class TmdbService : ITmdbService
 
         if (allGenres != null)
             film.Genres = allGenres.Where(x => film.GenreIds.Contains(x.Id)).ToList();
+
+        film.PosterPath = PosterUrl + film.PosterPath;
+        film.ReleaseDate = film.ReleaseDate.Substring(0, 4);
+        film.VoteAverage = Math.Round(film.VoteAverage, 1);
 
         return film;
     }
