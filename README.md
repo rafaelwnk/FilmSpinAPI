@@ -35,6 +35,163 @@ dotnet run
 http://localhost:5149
 ```
 
+## Utilização da API
+
+### Exemplos de uso:
+
+**1. Film**
+
+`POST v1/films`
+
+Retorna um filme aleatório baseado nos filtros fornecidos no body da requisição: genre, decade e rating
+
+**Exemplo de requisição:**
+
+```bash
+curl -X POST "http://localhost:5149/v1/films" \
+     -H "Content-Type: application/json" \
+     -d '{
+            "genre": "53",
+            "decade": "1990",
+            "rating": "8"
+        }'
+```
+
+**Exemplo de resposta:**
+
+```bash
+{
+    "data": {
+        "id": 807,
+        "title": "Seven - Os Sete Crimes Capitais",
+        "genre_ids": [
+            80,
+            9648,
+            53
+        ],
+        "genres": [
+            {
+                "id": 80,
+                "name": "Crime"
+            },
+            {
+                "id": 9648,
+                "name": "Mistério"
+            },
+            {
+                "id": 53,
+                "name": "Thriller"
+            }
+        ],
+        "overview": "Quando, a ponto de se aposentar, o detetive William Somerset aborda o último caso com a ajuda do recém-transferido David Mills, eles descobrem uma série de assassinatos. Logo percebem que estão lidando com um assassino que tem como alvo pessoas que ele acredita representar os sete pecados capitais.",
+        "poster_path": "https://image.tmdb.org/t/p/w500//cNFCNa5jUYmFmSpCg7dJ3jWd22d.jpg",
+        "release_date": "1995",
+        "vote_average": 8.4
+    },
+    "isSuccess": true,
+    "message": ""
+}
+```
+
+**2. Genres**
+
+`GET v1/genres`
+
+Retorna todos os gêneros de filmes disponíveis
+
+**Exemplo de requisição:**
+
+```bash
+curl -X GET "http://localhost:5149/v1/genres"
+```
+
+**Exemplo de resposta:**
+
+```bash
+{
+    "data": [
+        {
+            "id": 28,
+            "name": "Ação"
+        },
+        {
+            "id": 12,
+            "name": "Aventura"
+        },
+        {
+            "id": 16,
+            "name": "Animação"
+        },
+        {
+            "id": 35,
+            "name": "Comédia"
+        },
+        {
+            "id": 80,
+            "name": "Crime"
+        },
+        {
+            "id": 99,
+            "name": "Documentário"
+        },
+        {
+            "id": 18,
+            "name": "Drama"
+        },
+        {
+            "id": 10751,
+            "name": "Família"
+        },
+        {
+            "id": 14,
+            "name": "Fantasia"
+        },
+        {
+            "id": 36,
+            "name": "História"
+        },
+        {
+            "id": 27,
+            "name": "Terror"
+        },
+        {
+            "id": 10402,
+            "name": "Música"
+        },
+        {
+            "id": 9648,
+            "name": "Mistério"
+        },
+        {
+            "id": 10749,
+            "name": "Romance"
+        },
+        {
+            "id": 878,
+            "name": "Ficção científica"
+        },
+        {
+            "id": 10770,
+            "name": "Cinema TV"
+        },
+        {
+            "id": 53,
+            "name": "Thriller"
+        },
+        {
+            "id": 10752,
+            "name": "Guerra"
+        },
+        {
+            "id": 37,
+            "name": "Faroeste"
+        }
+    ],
+    "isSuccess": true,
+    "message": ""
+}
+```
+
 ## Contribuições
 
 Se você tiver alguma sugestão de melhoria, ideia nova ou perceber algo que pode ser ajustado:
