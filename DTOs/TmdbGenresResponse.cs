@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 using FilmSpinAPI.Models;
 
-namespace FilmSpinAPI.DTOs;
+namespace FilmSpinAPI.Dtos;
 
-public record GenreResponse
+public record TmdbGenresResponse
 (
     [property: JsonPropertyName("genres")] List<Genre> Genres
 );

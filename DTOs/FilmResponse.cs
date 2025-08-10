@@ -1,12 +1,14 @@
-using System.Text.Json.Serialization;
 using FilmSpinAPI.Models;
 
-namespace FilmSpinAPI.DTOs;
+namespace FilmSpinAPI.Dtos;
 
 public record FilmResponse
 (
-    [property: JsonPropertyName("page")] int Page,
-    [property: JsonPropertyName("results")] List<Film> Results,
-    [property: JsonPropertyName("total_pages")] int TotalPages,
-    [property: JsonPropertyName("total_results")] int TotalResults
+    int Id,
+    string Title,
+    List<Genre> Genres,
+    string Overview,
+    string PosterPath,
+    string ReleaseDate,
+    double VoteAverage
 );

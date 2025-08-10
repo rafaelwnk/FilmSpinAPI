@@ -1,4 +1,4 @@
-using FilmSpinAPI.DTOs;
+using FilmSpinAPI.Dtos;
 using FilmSpinAPI.Exceptions;
 using FilmSpinAPI.Extensions;
 using FilmSpinAPI.Interfaces;
