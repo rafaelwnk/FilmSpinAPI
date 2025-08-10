@@ -6,6 +6,7 @@ builder.LoadConfiguration();
 builder.AddServices();
 
 var app = builder.Build();
+app.UseCors();
 app.MapFilmEndpoints();
 app.MapHealthChecks("/health");
 
