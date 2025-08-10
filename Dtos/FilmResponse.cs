@@ -9,6 +9,6 @@ public record FilmResponse
     List<Genre> Genres,
     string Overview,
     string PosterPath,
-    string ReleaseDate,
+    string ReleaseYear,
     double VoteAverage
 );

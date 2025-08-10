@@ -64,11 +64,6 @@ curl -X POST "http://localhost:5149/v1/films" \
     "data": {
         "id": 807,
         "title": "Seven - Os Sete Crimes Capitais",
-        "genre_ids": [
-            80,
-            9648,
-            53
-        ],
         "genres": [
             {
                 "id": 80,
@@ -84,9 +79,9 @@ curl -X POST "http://localhost:5149/v1/films" \
             }
         ],
         "overview": "Quando, a ponto de se aposentar, o detetive William Somerset aborda o último caso com a ajuda do recém-transferido David Mills, eles descobrem uma série de assassinatos. Logo percebem que estão lidando com um assassino que tem como alvo pessoas que ele acredita representar os sete pecados capitais.",
-        "poster_path": "https://image.tmdb.org/t/p/w500//cNFCNa5jUYmFmSpCg7dJ3jWd22d.jpg",
-        "release_date": "1995",
-        "vote_average": 8.4
+        "posterPath": "https://image.tmdb.org/t/p/w500//cNFCNa5jUYmFmSpCg7dJ3jWd22d.jpg",
+        "releaseYear": "1995",
+        "voteAverage": 8.4
     },
     "isSuccess": true,
     "message": ""

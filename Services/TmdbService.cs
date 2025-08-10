@@ -60,7 +60,7 @@ public class TmdbService : ITmdbService
             film.Genres = allGenres.Where(x => film.GenreIds.Contains(x.Id)).ToList();
 
         film.PosterPath = PosterUrl + film.PosterPath;
-        film.ReleaseDate = film.ReleaseDate.Substring(0, 4);
+        film.ReleaseYear = film.ReleaseYear.Substring(0, 4);
         film.VoteAverage = Math.Round(film.VoteAverage, 1);
 
         return film.MapToFilmResponse();

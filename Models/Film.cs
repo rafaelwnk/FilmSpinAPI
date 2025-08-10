@@ -21,7 +21,7 @@ public class Film
     public string PosterPath { get; set; } = string.Empty;
 
     [JsonPropertyName("release_date")]
-    public string ReleaseDate { get; set; } = string.Empty;
+    public string ReleaseYear { get; set; } = string.Empty;
 
     [JsonPropertyName("vote_average")]
     public double VoteAverage { get; set; }
