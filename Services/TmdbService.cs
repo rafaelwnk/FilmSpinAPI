@@ -59,11 +59,7 @@ public class TmdbService : ITmdbService
         if (allGenres != null)
             film.Genres = allGenres.Where(x => film.GenreIds.Contains(x.Id)).ToList();
 
-        film.PosterPath = PosterUrl + film.PosterPath;
-        film.ReleaseYear = film.ReleaseYear.Substring(0, 4);
-        film.VoteAverage = Math.Round(film.VoteAverage, 1);
-
-        return film.MapToFilmResponse();
+        return film.MapToFilmResponse(PosterUrl);
     }
 
     public async Task<List<Genre>?> GetGenresAsync()
